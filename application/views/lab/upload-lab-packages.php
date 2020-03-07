@@ -8,26 +8,48 @@
 	 <li class="active">Package Add </li>
   </ol>
 </section>
-   <section class="content">
-      <div class="container card bg-white">
-      <div class="row">
-
-       <div class="col-md-12">
-                <div class="card bg-white">
-                  <div class="card-body">
-                       
-                        <!-- Tab panes -->
-                        <div class="tab-content">
-
-                            <div id="tab1" class="container tab-pane <?php if(isset($tab) && $tab ==''){ echo " active"; } ?>"><br>
-                                <form class="pad30 form-horizontal" action="<?php echo base_url('lab/testpackagepost'); ?>" method="post" id="add_package_name" name="add_package_name">
+   <section class="content bg-white">
+    <div class=" px-4 ">
+			  <form  action="<?php echo base_url('lab/testpackagepost'); ?>" method="post" id="add_package_name" name="add_package_name">
                                     <div class="row">
                                         <div class="form-group col-md-6">
                                             <label>Test Package Name</label>
                                             <input type="text" class="form-control" name="test_package_name" id="test_package_name" placeholder="Enter Package Name">
                                         </div>
 										</div>
-
+	 <div class="row clearfix">
+		<div class="col-md-12 column">
+			<table class="table table-bordered table-hover" id="tab_logic">
+				
+				<tbody>
+					<tr id='addr0'>
+						<td>
+						1
+						</td>
+						<td>
+						<select class="form-control">
+							<option>Select</option>
+							<option>1</option>
+							<option>2</option>
+						</select>
+						</td>
+						<td>
+						<select class="form-control select2"  multiple="multiple">
+							<option>Select</option>
+							<option>1</option>
+							<option>2</option>
+						</select>
+						</td>
+						
+					</tr>
+                    <tr id='addr1'></tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+                                        <div class="row">
+											<div class="col-md-12"><a id="add_row" class="btn btn-default pull-left">Add Row</a><a id='delete_row' class="pull-right btn btn-default">Delete Row</a></div>
+										</div>
                                         <div class="row">
                                         <div class="form-group col-md-6">
                                             <label>Test Type</label>
@@ -88,21 +110,33 @@
                                         <div class="col-md-12 text-center">
                                             <button type="submit" class="btn btn-primary">Upload</button>
                                         </div>
-                                    </div>
+                                   
                                 </form>
-                            </div>
-                            
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+    </div>
     </div>
 	</section>
 </div>
 
 
 
+<script>
+     $(document).ready(function(){
+      var i=1;
+     $("#add_row").click(function(){
+      $('#addr'+i).html("<td>"+ (i+1) +"</td><td><select class='form-control'><option>Select</option><option>1</option><option>2</option></select></td><td><select class='form-control select2 ' multiple='multiple'><option>Select</option><option>1</option><option>2</option></select></td>");
+
+      $('#tab_logic').append('<tr id="addr'+(i+1)+'"></tr>');
+      i++; 
+  });
+     $("#delete_row").click(function(){
+    	 if(i>1){
+		 $("#addr"+(i-1)).html('');
+		 i--;
+		 }
+	 });
+
+});
+</script>
 <script>
 
 function get_lab_names_list(name){
